@@ -2,6 +2,10 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    id("com.google.gms.google-services")
+    //applying hilt plugin
+    id("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -56,4 +60,36 @@ dependencies {
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
+
+    //HILT core libraries
+    val hilt_version = "2.51"
+    implementation("com.google.dagger:hilt-android:$hilt_version")
+
+    //HILT annotation processor
+    kapt("com.google.dagger:hilt-compiler:$hilt_version")
+
+    //HILT Integration with jetpack compose view models
+    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
+
+    //Firebase SDKs for Phase 1 & 2
+    implementation(platform("com.google.firebase:firebase-bom:32.4.0"))
+    implementation("com.google.firebase:firebase-auth-ktx")
+    implementation("com.google.firebase:firebase-firestore-ktx")
+    implementation("com.google.firebase:firebase-storage-ktx")
+
+    //Extended icon library
+    implementation("androidx.compose.material:material-icons-extended")
+
+    // NAVIGATION & ARCHITECTURE
+    // Jetpack Navigation Component for Compose
+    val nav_version = "2.7.4"
+    implementation("androidx.navigation:navigation-compose:$nav_version")
+
+    // Coroutines and ViewModel integration
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose")
+
+    // NETWORKING (for Phase 3 - Research Feed)
+    val retrofit_version = "2.9.0"
+    implementation("com.squareup.retrofit2:retrofit:$retrofit_version")
+    implementation("com.squareup.retrofit2:converter-gson:$retrofit_version")
 }
